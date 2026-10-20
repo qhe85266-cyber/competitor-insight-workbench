@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vibe-demos.local/competitor-insight-workbench/schemas/opportunity-hypothesis.schema.json",
+  "title": "OpportunityHypothesis",
+  "description": "竞品洞察工作台机会假设卡。与《竞品洞察工作台-设计规格》OpportunityCard 对齐：title/summary/confidence/evidence/review；AI 层额外提供 dimensions 与可解析 source_ref。模型只允许产出 review=pending。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "summary",
+    "confidence",
+    "evidence",
+    "review",
+    "dimensions"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "机会唯一 ID，如 opp_01"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 36,
+      "description": "一句话假设标题（设计规格 ≤36 字）"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80,
+      "description": "说明正文（设计规格 ≤80 字）；对应卡上「正文 2–3 行」"
+    },
+    "hypothesis": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000,
+      "description": "可选扩展：可检验的完整假设（导出/面试口述用）；UI 卡优先用 title+summary"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "description": "置信度。UI：高/中/低三色点。规则：冲突或 pending 证据→low；单点旁证→medium；≥2 维一致可引用→high"
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "description": "证据 1–3 条；UI 展示 sourceLabel + quote",
+      "items": {
+        "$ref": "#/definitions/EvidenceItem"
+      }
+    },
+    "review": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "rejected"
+      ],
+      "description": "人审闸门。模型必须输出 pending；accepted/rejected 仅由用户点击采纳/驳回写入"
+    },
+    "dimensions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "适用竞品维 id，须存在于 comparison.dimensions[].id",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rationale_short": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "可选：一句话讲给 PM 的设计理由"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "可选：ISO 8601 创建时间"
+    }
+  },
+  "definitions": {
+    "EvidenceItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceLabel",
+        "quote",
+        "source_ref"
+      ],
+      "properties": {
+        "sourceLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40,
+          "description": "来源标签，如「对比·定价」「公开页·功能」"
+        },
+        "quote": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600,
+          "description": "摘录；应为对比表单元格文本的一致或连续子串"
+        },
+        "source_ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "可解析引用：cell:<dimensionId>.<competitorId>，必须能在 comparison.cells 解析"
+        },
+        "competitor_id": {
+          "type": "string",
+          "description": "可选冗余，便于校验"
+        },
+        "dimension_id": {
+          "type": "string",
+          "description": "可选冗余，便于校验"
+        }
+      }
+    }
+  }
+}

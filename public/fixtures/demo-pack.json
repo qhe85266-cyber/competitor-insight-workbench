@@ -1,0 +1,184 @@
+{
+  "meta": {
+    "fixture_version": "1.0.0",
+    "demo_mode": true,
+    "topic": "AI Agent 开发平台",
+    "locale": "zh-CN",
+    "source_note": "概念提炼自 competitor-insight-agent/reports/g3，demo 级改写，非整文件复制",
+    "aligned_with": "/workspace/design/竞品洞察工作台-设计规格.md"
+  },
+  "competitors": [
+    {
+      "id": "dify",
+      "name": "Dify",
+      "sourceUrls": [
+        "https://dify.ai/zh",
+        "https://dify.ai/"
+      ]
+    },
+    {
+      "id": "fastgpt",
+      "name": "FastGPT",
+      "sourceUrls": [
+        "https://fastgpt.cn/",
+        "https://fastgpt.cn/tutorial/fastgpt-platform-quick-guide"
+      ]
+    }
+  ],
+  "comparison": {
+    "dimensions": [
+      {
+        "id": "pos",
+        "name": "定位一句话"
+      },
+      {
+        "id": "audience",
+        "name": "核心用户"
+      },
+      {
+        "id": "pricing",
+        "name": "定价模式"
+      },
+      {
+        "id": "feat",
+        "name": "关键能力"
+      },
+      {
+        "id": "diff",
+        "name": "差异化主张"
+      },
+      {
+        "id": "deploy",
+        "name": "渠道 / 增长"
+      }
+    ],
+    "cells": {
+      "pos": {
+        "dify": "构建生产级 Agentic 工作流：统一画布上做工作流与 RAG Pipeline，覆盖原型到生产。",
+        "fastgpt": "基于大模型的 AI Agent 应用开发平台，定位企业级 AI 生产力引擎，积木式组装智能体。"
+      },
+      "audience": {
+        "dify": "工程与业务团队；强调无代码/低门槛与全员数字化开发。",
+        "fastgpt": "开发者与业务人员；非开发者可拖拽组装生产可用 AI 应用。"
+      },
+      "pricing": {
+        "dify": "开源社区版（Apache-2.0）+ 托管云 + 企业私有化（联系销售）；公开页无具体价目。",
+        "fastgpt": "类 AGPL 开源（允许后台商用、禁止 SaaS 转售）+ 商业版 SaaS + 私有化/咨询；公开价目缺失。"
+      },
+      "feat": {
+        "dify": "Workflow/Chatflow、Agent、知识流水线、插件/Marketplace、发布与监控。",
+        "fastgpt": "知识库问答、可视化工作流、Agent 编排、工具调用；多路 RAG + Agent Loop。"
+      },
+      "diff": {
+        "dify": "生产级全链路 + 低门槛可视化；企业合规叙事（SOC2/ISO）；生态 Marketplace。",
+        "fastgpt": "工程化中间层：可视化 DAG、多路召回 RAG、工作流工具化；侧重私有化交付与服务变现。"
+      },
+      "deploy": {
+        "dify": "Cloud / VPC / Self-hosted（Docker、K8s）；企业版 SSO/SAML、RBAC、审计。",
+        "fastgpt": "Docker / Sealos 一键；开源自托管与商业 SaaS；支持 SSO 与 RBAC。"
+      }
+    }
+  },
+  "opportunities": [
+    {
+      "id": "opp_01",
+      "title": "合规私有化选型优先看 Dify 企业路径",
+      "summary": "若采购要过安全审计，Dify 的 VPC/自托管与合规叙事更易对齐；仍需补公开价目与实测。",
+      "hypothesis": "当买家以「合规私有化 + 生产级工作流」为硬门槛时，Dify 企业部署与认证叙事更易通过采购；验证方式：用同一核心任务在 VPC 样板环境跑通，并索取正式价目与审计材料。",
+      "confidence": "medium",
+      "review": "pending",
+      "dimensions": [
+        "deploy",
+        "pricing",
+        "diff"
+      ],
+      "rationale_short": "部署治理与合规是可引用差异，但缺公开价目，故置信度为中。",
+      "created_at": "2026-10-21T01:40:00+08:00",
+      "evidence": [
+        {
+          "sourceLabel": "对比·渠道/增长",
+          "quote": "Cloud / VPC / Self-hosted（Docker、K8s）；企业版 SSO/SAML、RBAC、审计。",
+          "source_ref": "cell:deploy.dify",
+          "competitor_id": "dify",
+          "dimension_id": "deploy"
+        },
+        {
+          "sourceLabel": "对比·差异化",
+          "quote": "企业合规叙事（SOC2/ISO）",
+          "source_ref": "cell:diff.dify",
+          "competitor_id": "dify",
+          "dimension_id": "diff"
+        }
+      ]
+    },
+    {
+      "id": "opp_02",
+      "title": "强 RAG 自托管可偏向 FastGPT 许可",
+      "summary": "团队要可视化编排+强 RAG 且后台商用自托管时，FastGPT 许可与工程封装更贴；SaaS 转售需规避。",
+      "hypothesis": "若核心需求是「可视化编排 + 强 RAG」且计划自托管后台商用（非转售 SaaS），FastGPT 的许可表述与私有化叙事更贴合；验证：对照官方许可原文 + 同一知识库任务的召回评测。",
+      "confidence": "medium",
+      "review": "pending",
+      "dimensions": [
+        "pricing",
+        "feat",
+        "diff"
+      ],
+      "rationale_short": "许可与 RAG 工程点可引用，但许可细节需原文核实，故为中。",
+      "created_at": "2026-10-21T01:40:00+08:00",
+      "evidence": [
+        {
+          "sourceLabel": "对比·定价",
+          "quote": "类 AGPL 开源（允许后台商用、禁止 SaaS 转售）+ 商业版 SaaS + 私有化/咨询",
+          "source_ref": "cell:pricing.fastgpt",
+          "competitor_id": "fastgpt",
+          "dimension_id": "pricing"
+        },
+        {
+          "sourceLabel": "对比·关键能力",
+          "quote": "多路 RAG + Agent Loop",
+          "source_ref": "cell:feat.fastgpt",
+          "competitor_id": "fastgpt",
+          "dimension_id": "feat"
+        }
+      ]
+    },
+    {
+      "id": "opp_03",
+      "title": "差异在治理与 RAG 深度而非有无 Agent",
+      "summary": "双方都有工作流/Agent/知识库叙事；选型应用同一核心任务实测部署治理与召回质量。",
+      "hypothesis": "「有无 Agent」不是有效差异轴；更可能的分叉在部署治理、插件生态与 RAG 工程深度。验证：固定同一任务（入库→问答→工具调用→发布），对比上线步骤数、权限模型与召回指标。",
+      "confidence": "high",
+      "review": "pending",
+      "dimensions": [
+        "feat",
+        "diff",
+        "pos"
+      ],
+      "rationale_short": "多维摘录方向一致且无直接冲突，适合作为高置信的选型框架假设。",
+      "created_at": "2026-10-21T01:40:00+08:00",
+      "evidence": [
+        {
+          "sourceLabel": "对比·关键能力",
+          "quote": "Workflow/Chatflow、Agent、知识流水线、插件/Marketplace、发布与监控。",
+          "source_ref": "cell:feat.dify",
+          "competitor_id": "dify",
+          "dimension_id": "feat"
+        },
+        {
+          "sourceLabel": "对比·关键能力",
+          "quote": "知识库问答、可视化工作流、Agent 编排、工具调用",
+          "source_ref": "cell:feat.fastgpt",
+          "competitor_id": "fastgpt",
+          "dimension_id": "feat"
+        },
+        {
+          "sourceLabel": "对比·差异化",
+          "quote": "工程化中间层：可视化 DAG、多路召回 RAG、工作流工具化",
+          "source_ref": "cell:diff.fastgpt",
+          "competitor_id": "fastgpt",
+          "dimension_id": "diff"
+        }
+      ]
+    }
+  ]
+}
